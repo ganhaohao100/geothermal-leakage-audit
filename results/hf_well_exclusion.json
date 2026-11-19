@@ -1,0 +1,57 @@
+{
+ "seed": 20260927,
+ "block_km": 50.0,
+ "buffer_km": 10.0,
+ "neg_ratio": 3,
+ "n_well_records": 1118,
+ "n_well_cells": 797,
+ "n_wells_within_10km": 112,
+ "frac_wells_within_10km": 0.1002,
+ "n_cells_dropped": 74,
+ "baseline": {
+  "n_pos": 797,
+  "n_neg": 2391,
+  "auc": 0.8494,
+  "auc_sd": 0.017,
+  "auc_rng": 0.0417,
+  "ap": 0.6294,
+  "folds": [
+   0.8468,
+   0.8364,
+   0.8367,
+   0.849,
+   0.8781
+  ],
+  "pos_per_fold": [
+   137,
+   171,
+   136,
+   179,
+   174
+  ]
+ },
+ "drop_10km": {
+  "n_pos": 723,
+  "n_neg": 2391,
+  "auc": 0.8489,
+  "auc_sd": 0.015,
+  "auc_rng": 0.04,
+  "ap": 0.6104,
+  "folds": [
+   0.8453,
+   0.8497,
+   0.8335,
+   0.8425,
+   0.8735
+  ],
+  "pos_per_fold": [
+   128,
+   159,
+   124,
+   159,
+   153
+  ]
+ },
+ "delta_auc": -0.0005,
+ "elapsed_s": 3.7
+}

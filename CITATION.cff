@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the associated manuscript."
+title: "geothermal-leakage-audit"
+abstract: "Audit code for target-dependent label leakage and play-type transfer failure in machine-learning geothermal favorability mapping."
+type: software
+version: "1.0.0"
+date-released: "2026-11-18"
+license: MIT
+authors:
+  - family-names: "Gan"
+    given-names: "Haonan"
+  - family-names: "Zhang"
+    given-names: "Wei"
+  - family-names: "Wang"
+    given-names: "Xiao"
+  - family-names: "Li"
+    given-names: "Tingxin"
+  - family-names: "Wang"
+    given-names: "Bowen"
+  - family-names: "Yang"
+    given-names: "Minghui"
+  - family-names: "Wang"
+    given-names: "Guiling"

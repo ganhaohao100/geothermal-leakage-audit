@@ -1,0 +1,445 @@
+{
+ "tiers": {
+  "t1_fault_stress_only": {
+   "auc": 0.6054,
+   "auc_sd": 0.01484092315187975,
+   "auc_rng": 0.0353,
+   "ap": 0.3763,
+   "folds_auc": [
+    0.5968,
+    0.5871,
+    0.6224,
+    0.6185,
+    0.602
+   ],
+   "perm_ap": {
+    "f_dist": 0.0058,
+    "f_den": 0.0074,
+    "f_end": 0.0199,
+    "Ts_mean": 0.0266,
+    "Ts_max": 0.0148,
+    "Td_mean": 0.073,
+    "Td_max": 0.0033
+   },
+   "perm_ap_sd": {
+    "f_dist": 0.0156,
+    "f_den": 0.0075,
+    "f_end": 0.0112,
+    "Ts_mean": 0.0202,
+    "Ts_max": 0.0052,
+    "Td_mean": 0.032,
+    "Td_max": 0.0023
+   },
+   "perm_auc": {
+    "f_dist": 0.0132,
+    "f_den": 0.0192,
+    "f_end": 0.0346,
+    "Ts_mean": 0.0441,
+    "Ts_max": 0.0102,
+    "Td_mean": 0.0319,
+    "Td_max": -0.0012
+   },
+   "grouped_ap": {
+    "fault_geometry": 0.0275,
+    "tendency": 0.1086,
+    "heat_flow": NaN,
+    "explicit_target_derived": NaN
+   },
+   "grouped_ap_sd": {
+    "fault_geometry": 0.0131,
+    "tendency": 0.0136,
+    "heat_flow": NaN,
+    "explicit_target_derived": NaN
+   },
+   "grouped_auc": {
+    "fault_geometry": 0.0441,
+    "tendency": 0.0789,
+    "heat_flow": NaN,
+    "explicit_target_derived": NaN
+   },
+   "cliff_ap": {
+    "top1": "Td_mean",
+    "top2": "Ts_mean",
+    "ratio": 2.7
+   },
+   "cliff_auc": {
+    "top1": "Ts_mean",
+    "top2": "f_end",
+    "ratio": 1.3
+   }
+  },
+  "t2_plus_large_sigma_hf": {
+   "auc": 0.7897,
+   "auc_sd": 0.0070363342729008954,
+   "auc_rng": 0.0184,
+   "ap": 0.5478,
+   "folds_auc": [
+    0.7898,
+    0.7921,
+    0.7926,
+    0.7962,
+    0.7778
+   ],
+   "perm_ap": {
+    "f_dist": 0.0016,
+    "f_den": 0.0069,
+    "f_end": 0.0073,
+    "Ts_mean": 0.0126,
+    "Ts_max": 0.0195,
+    "Td_mean": 0.025,
+    "Td_max": 0.0007,
+    "hf_bg": 0.117,
+    "hf_res": 0.1431,
+    "hf_grad": 0.0939
+   },
+   "perm_ap_sd": {
+    "f_dist": 0.0066,
+    "f_den": 0.0077,
+    "f_end": 0.0033,
+    "Ts_mean": 0.0133,
+    "Ts_max": 0.012,
+    "Td_mean": 0.0151,
+    "Td_max": 0.0011,
+    "hf_bg": 0.0038,
+    "hf_res": 0.0179,
+    "hf_grad": 0.0172
+   },
+   "perm_auc": {
+    "f_dist": 0.0003,
+    "f_den": 0.0028,
+    "f_end": 0.0027,
+    "Ts_mean": 0.0075,
+    "Ts_max": 0.0037,
+    "Td_mean": 0.0042,
+    "Td_max": 0.0003,
+    "hf_bg": 0.0466,
+    "hf_res": 0.176,
+    "hf_grad": 0.0579
+   },
+   "grouped_ap": {
+    "fault_geometry": 0.0138,
+    "tendency": 0.0522,
+    "heat_flow": 0.2701,
+    "explicit_target_derived": NaN
+   },
+   "grouped_ap_sd": {
+    "fault_geometry": 0.0127,
+    "tendency": 0.014,
+    "heat_flow": 0.0144,
+    "explicit_target_derived": NaN
+   },
+   "grouped_auc": {
+    "fault_geometry": 0.0048,
+    "tendency": 0.0188,
+    "heat_flow": 0.2638,
+    "explicit_target_derived": NaN
+   },
+   "cliff_ap": {
+    "top1": "hf_res",
+    "top2": "hf_bg",
+    "ratio": 1.2
+   },
+   "cliff_auc": {
+    "top1": "hf_res",
+    "top2": "hf_grad",
+    "ratio": 3.0
+   }
+  },
+  "t3_plus_explicit_target_derived": {
+   "auc": 0.8277,
+   "auc_sd": 0.01013434753696557,
+   "auc_rng": 0.027,
+   "ap": 0.6019,
+   "folds_auc": [
+    0.8267,
+    0.8448,
+    0.8178,
+    0.8243,
+    0.8249
+   ],
+   "perm_ap": {
+    "f_dist": 0.0004,
+    "f_den": 0.0017,
+    "f_end": 0.0059,
+    "Ts_mean": 0.0095,
+    "Ts_max": 0.0095,
+    "Td_mean": 0.0102,
+    "Td_max": 0.0013,
+    "hf_bg": 0.0423,
+    "hf_res": 0.0858,
+    "hf_grad": 0.0577,
+    "h_den": 0.1506,
+    "h_q": 0.0122,
+    "h_lgq": 0.0134,
+    "h_qg": 0.0633
+   },
+   "perm_ap_sd": {
+    "f_dist": 0.0073,
+    "f_den": 0.0041,
+    "f_end": 0.0032,
+    "Ts_mean": 0.0165,
+    "Ts_max": 0.0094,
+    "Td_mean": 0.013,
+    "Td_max": 0.0031,
+    "hf_bg": 0.0221,
+    "hf_res": 0.0234,
+    "hf_grad": 0.0161,
+    "h_den": 0.0126,
+    "h_q": 0.007,
+    "h_lgq": 0.016,
+    "h_qg": 0.014
+   },
+   "perm_auc": {
+    "f_dist": -0.0011,
+    "f_den": -0.0007,
+    "f_end": 0.0031,
+    "Ts_mean": 0.0042,
+    "Ts_max": -0.0003,
+    "Td_mean": 0.0017,
+    "Td_max": 0.0002,
+    "hf_bg": 0.0109,
+    "hf_res": 0.1015,
+    "hf_grad": 0.0219,
+    "h_den": 0.0807,
+    "h_q": 0.006,
+    "h_lgq": 0.0042,
+    "h_qg": 0.0376
+   },
+   "grouped_ap": {
+    "fault_geometry": 0.0057,
+    "tendency": 0.0334,
+    "heat_flow": 0.1525,
+    "explicit_target_derived": 0.2119
+   },
+   "grouped_ap_sd": {
+    "fault_geometry": 0.0132,
+    "tendency": 0.0074,
+    "heat_flow": 0.017,
+    "explicit_target_derived": 0.0234
+   },
+   "grouped_auc": {
+    "fault_geometry": 0.0,
+    "tendency": 0.0069,
+    "heat_flow": 0.1287,
+    "explicit_target_derived": 0.1482
+   },
+   "cliff_ap": {
+    "top1": "h_den",
+    "top2": "hf_res",
+    "ratio": 1.8
+   },
+   "cliff_auc": {
+    "top1": "hf_res",
+    "top2": "h_den",
+    "ratio": 1.3
+   }
+  }
+ },
+ "sweep": {
+  "sigma_0.10": {
+   "auc": 0.9954,
+   "auc_sd": 0.0012218837915284574,
+   "auc_rng": 0.003,
+   "ap": 0.977,
+   "folds_auc": [
+    0.9974,
+    0.9945,
+    0.995,
+    0.9955,
+    0.9944
+   ],
+   "perm_ap": {
+    "f_dist": -0.0014,
+    "f_den": -0.0013,
+    "f_end": -0.0007,
+    "Ts_mean": 0.002,
+    "Ts_max": -0.0002,
+    "Td_mean": -0.0006,
+    "Td_max": -0.0,
+    "hf_bg": 0.0019,
+    "hf_res": 0.0004,
+    "hf_grad": -0.0004,
+    "h_den": 0.5519,
+    "h_q": 0.0061,
+    "h_lgq": 0.0017,
+    "h_qg": 0.0085
+   },
+   "perm_ap_sd": {
+    "f_dist": 0.0025,
+    "f_den": 0.0046,
+    "f_end": 0.0028,
+    "Ts_mean": 0.0031,
+    "Ts_max": 0.0036,
+    "Td_mean": 0.0009,
+    "Td_max": 0.0001,
+    "hf_bg": 0.0014,
+    "hf_res": 0.0033,
+    "hf_grad": 0.0013,
+    "h_den": 0.019,
+    "h_q": 0.0036,
+    "h_lgq": 0.002,
+    "h_qg": 0.0026
+   },
+   "perm_auc": {
+    "f_dist": -0.0001,
+    "f_den": -0.0001,
+    "f_end": -0.0002,
+    "Ts_mean": 0.0,
+    "Ts_max": -0.0001,
+    "Td_mean": -0.0001,
+    "Td_max": -0.0,
+    "hf_bg": 0.0003,
+    "hf_res": 0.0001,
+    "hf_grad": -0.0001,
+    "h_den": 0.2627,
+    "h_q": 0.0008,
+    "h_lgq": 0.0002,
+    "h_qg": 0.0012
+   },
+   "grouped_ap": {
+    "fault_geometry": -0.0017,
+    "tendency": 0.0004,
+    "heat_flow": 0.0004,
+    "explicit_target_derived": 0.7051
+   },
+   "grouped_ap_sd": {
+    "fault_geometry": 0.006,
+    "tendency": 0.0055,
+    "heat_flow": 0.0041,
+    "explicit_target_derived": 0.0153
+   },
+   "grouped_auc": {
+    "fault_geometry": -0.0001,
+    "tendency": -0.0002,
+    "heat_flow": 0.0001,
+    "explicit_target_derived": 0.4793
+   },
+   "cliff_ap": {
+    "top1": "h_den",
+    "top2": "h_qg",
+    "ratio": 64.9
+   },
+   "cliff_auc": {
+    "top1": "h_den",
+    "top2": "h_qg",
+    "ratio": 227.5
+   }
+  },
+  "sigma_0.40": {
+   "auc": 0.9195,
+   "auc_sd": 0.014820863672539455,
+   "auc_rng": 0.0362,
+   "ap": 0.7542,
+   "folds_auc": [
+    0.9068,
+    0.9384,
+    0.9022,
+    0.9258,
+    0.9241
+   ],
+   "perm_ap": {
+    "f_dist": -0.0054,
+    "f_den": -0.0043,
+    "f_end": -0.0051,
+    "Ts_mean": 0.002,
+    "Ts_max": 0.0009,
+    "Td_mean": 0.0015,
+    "Td_max": 0.0,
+    "hf_bg": -0.0055,
+    "hf_res": 0.01,
+    "hf_grad": -0.0058,
+    "h_den": 0.4687,
+    "h_q": -0.0052,
+    "h_lgq": -0.0011,
+    "h_qg": 0.0117
+   },
+   "perm_ap_sd": {
+    "f_dist": 0.0073,
+    "f_den": 0.0074,
+    "f_end": 0.0051,
+    "Ts_mean": 0.013,
+    "Ts_max": 0.0068,
+    "Td_mean": 0.0014,
+    "Td_max": 0.0004,
+    "hf_bg": 0.0066,
+    "hf_res": 0.0111,
+    "hf_grad": 0.0068,
+    "h_den": 0.0259,
+    "h_q": 0.0062,
+    "h_lgq": 0.0081,
+    "h_qg": 0.0049
+   },
+   "perm_auc": {
+    "f_dist": -0.0018,
+    "f_den": -0.0003,
+    "f_end": -0.0011,
+    "Ts_mean": 0.0007,
+    "Ts_max": -0.0004,
+    "Td_mean": 0.0003,
+    "Td_max": -0.0,
+    "hf_bg": -0.0013,
+    "hf_res": 0.0043,
+    "hf_grad": -0.0017,
+    "h_den": 0.3657,
+    "h_q": -0.0013,
+    "h_lgq": -0.0001,
+    "h_qg": 0.0059
+   },
+   "grouped_ap": {
+    "fault_geometry": -0.0087,
+    "tendency": 0.0042,
+    "heat_flow": 0.0083,
+    "explicit_target_derived": 0.4803
+   },
+   "grouped_ap_sd": {
+    "fault_geometry": 0.0101,
+    "tendency": 0.0101,
+    "heat_flow": 0.0123,
+    "explicit_target_derived": 0.0257
+   },
+   "grouped_auc": {
+    "fault_geometry": -0.0017,
+    "tendency": 0.0007,
+    "heat_flow": 0.0025,
+    "explicit_target_derived": 0.38
+   },
+   "cliff_ap": {
+    "top1": "h_den",
+    "top2": "h_qg",
+    "ratio": 40.1
+   },
+   "cliff_auc": {
+    "top1": "h_den",
+    "top2": "h_qg",
+    "ratio": 62.1
+   }
+  }
+ },
+ "groups": {
+  "fault_geometry": [
+   "f_dist",
+   "f_den",
+   "f_end"
+  ],
+  "tendency": [
+   "Ts_mean",
+   "Ts_max",
+   "Td_mean",
+   "Td_max"
+  ],
+  "heat_flow": [
+   "hf_bg",
+   "hf_res",
+   "hf_grad"
+  ],
+  "explicit_target_derived": [
+   "h_den",
+   "h_q",
+   "h_lgq",
+   "h_qg"
+  ]
+ },
+ "n_label_cells": 1107,
+ "n_negatives": 3321,
+ "seed": 20260927
+}
