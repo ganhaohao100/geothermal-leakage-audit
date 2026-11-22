@@ -1,68 +1,36 @@
-"""Synthetic quick test for the geothermal leakage audit repository.
+"""Synthetic quick test for the audit package.
 
-This test deliberately uses no project data. It exercises the grid, Gaussian
-smoothing, spatial-block assignment, buffer exclusion and AUC routines that the
-analysis scripts rely on. Expected runtime is under 10 seconds.
+This script verifies that the Python environment can run the modelling stack
+without any restricted spring or well data. It generates a small synthetic
+label set, fits a random forest across five stratified folds, and prints the
+mean held-out AUC.
 """
+
 import numpy as np
-from scipy.ndimage import gaussian_filter
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import roc_auc_score
+from sklearn.model_selection import StratifiedKFold
 
+SEED = 20261122
 
-def make_grid(n=80, seed=20261118):
-    rng = np.random.default_rng(seed)
-    points = rng.integers(0, n, size=(240, 2))
-    counts = np.zeros((n, n), dtype=float)
-    for i, j in points:
-        counts[i, j] += 1.0
-    return counts
+rng = np.random.default_rng(SEED)
+n_samples, n_features = 600, 8
+X = rng.normal(size=(n_samples, n_features))
+logit = 1.4 * X[:, 0] - 1.1 * X[:, 1] + 0.4 * rng.normal(size=n_samples)
+y = (logit > np.quantile(logit, 0.75)).astype(int)
 
+folds = StratifiedKFold(n_splits=5, shuffle=True, random_state=0)
+scores = []
+for train, test in folds.split(X, y):
+    model = RandomForestClassifier(
+        n_estimators=200,
+        min_samples_leaf=2,
+        random_state=0,
+    )
+    model.fit(X[train], y[train])
+    scores.append(roc_auc_score(y[test], model.predict_proba(X[test])[:, 1]))
 
-def assign_blocks(n, block=10):
-    rows, cols = np.indices((n, n))
-    return (rows // block) * (n // block) + (cols // block)
-
-
-def buffered_split(blocks, test_blocks, buffer_cells=1):
-    test_mask = np.isin(blocks, test_blocks)
-    train_mask = ~test_mask
-    for di in range(-buffer_cells, buffer_cells + 1):
-        for dj in range(-buffer_cells, buffer_cells + 1):
-            shifted = np.zeros_like(test_mask)
-            src = test_mask[max(0, di):test_mask.shape[0] + min(0, di),
-                            max(0, dj):test_mask.shape[1] + min(0, dj)]
-            dst = shifted[max(0, -di):test_mask.shape[0] + min(0, -di),
-                          max(0, -dj):test_mask.shape[1] + min(0, -dj)]
-            dst[:] = src
-            train_mask &= ~shifted
-    return train_mask, test_mask
-
-
-def main():
-    counts = make_grid()
-    smoothed = gaussian_filter(counts, sigma=2.0, mode="wrap")
-    assert np.isclose(smoothed.sum(), counts.sum(), rtol=1e-6)
-    assert smoothed.shape == counts.shape
-
-    blocks = assign_blocks(counts.shape[0], block=10)
-    unique = np.unique(blocks)
-    assert unique.size == 64
-    train, test = buffered_split(blocks, test_blocks=(27, 28, 35, 36), buffer_cells=1)
-    assert test.sum() > 0 and train.sum() > 0
-    assert not np.any(train & test)
-
-    rng = np.random.default_rng(7)
-    scores = smoothed.ravel()
-    labels = (scores > np.quantile(scores, 0.70)).astype(int)
-    flip = rng.random(labels.size) < 0.15
-    labels[flip] = 1 - labels[flip]
-    auc = roc_auc_score(labels, scores)
-    assert 0.0 <= auc <= 1.0
-    print(f"quick-test passed: grid={counts.shape[0]}x{counts.shape[1]}, "
-          f"blocks={unique.size}, withheld_cells={test.sum()}, "
-          f"training_cells={train.sum()}, synthetic_AUC={auc:.3f}")
-
-
-if __name__ == "__main__":
-    main()
-
+auc = float(np.mean(scores))
+print(f"quick test AUC = {auc:.3f}")
+assert auc > 0.70, "quick test failed: synthetic signal was not recovered"
+print("quick test passed")
