@@ -33,7 +33,7 @@ with area and favourability; polygon vertices are not included.
 ## Derived rasters (not redistributed)
 
 Per-cell rasters, fold assignments and the fitted screening surface are not
-included. The nine candidate areas are summarised in
+included. The ten candidate areas are summarised in
 `results/targets_well_geo.csv`, which gives grid-cell centroids, areas and
 favourability; polygon vertices are not included. A reader holding equivalent
 label data can rebuild the surface with the code here and the open layers above.
