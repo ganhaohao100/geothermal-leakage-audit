@@ -116,11 +116,9 @@ def ts_td(S, strike_deg, dip_deg, P):
     sn = float(t @ n)
     tau = float(np.linalg.norm(t - sn * n))
     Ts = tau / max(sn, 1e-6)
-    R = np.column_stack([u, v, n])
-    M2 = (R.T @ Se @ R)[:2, :2]
-    lam = np.sort(np.linalg.eigvalsh(M2))
-    l1, l2 = max(lam[1], 0.0), max(lam[0], 0.0)
-    Td = (l1 - l2) / max(l1 + l2, 1e-9)
+    ev = np.sort(np.linalg.eigvalsh(Se))
+    s1, s3 = ev[2], ev[0]
+    Td = (s1 - sn) / max(s1 - s3, 1e-9)
     return float(Ts), float(np.clip(Td, 0.0, 1.0))
 
 

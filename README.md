@@ -3,6 +3,10 @@
 Reproduction package for the manuscript on target-type-dependent label leakage in
 machine-learning geothermal favorability mapping (mainland China, 0.05 deg grid).
 
+Release 2.4 (2026-11-22) renumbers the supplement so that Tables S1-S6 and Figs. S1-S2 follow the order in which the main text cites them, and adds a synthetic quick test under examples/. It also adds the split-sensitivity and robustness scripts/results and synchronizes the archived results with the final manuscript (10/22/50 components at P99/P98/P95; 40,603 km2 at P99).
+
+Archived release: v2.4, DOI: [10.5281/zenodo.24441638](https://doi.org/10.5281/zenodo.24441638).
+
 This package contains the analysis code and the aggregated results behind the
 reported tables and figures. It does not contain the spring and well inventories
 used as labels, nor any raster derived from them.
@@ -12,17 +16,28 @@ included; the candidate-area table is stored at 0.05 deg grid precision.
 ## Contents
 
 ```
-code/            20 analysis scripts (one per experiment), plus a synthetic quick test
+code/            22 analysis scripts (one per experiment)
 results/         archived JSON/CSV outputs, as reported in the manuscript
 data/            input schema and the baseline CV report; restricted inputs are not included
 nine_region.py   nine-region tectonic-regime index (Ts/Td input)
 common.py        grid, kernel smoothing, fault-parameter utilities
 config.py        path configuration
 docs/            data sources and release notes
+examples/        synthetic quick test (no restricted data)
 ```
 
-## Inputs
+## Quick test
 
+A synthetic smoke test verifies the environment without the restricted bundle:
+
+```bash
+python examples/quick_test.py
+```
+
+It trains a small random forest on generated data across five stratified folds,
+prints the mean held-out AUC, and ends with `quick test passed`.
+
+## Inputs
 All scripts read a single raster bundle, `features.npz`. Most write JSON to
 `output/`; `stepT` and `stepU` also write their tables to `results/`. Point `GEOTHERMAL_DATA` at the directory holding that bundle:
 
@@ -48,35 +63,9 @@ Two further inputs are expected in `GEOTHERMAL_DATA`:
 - `fig1_cache.pkl` — cached boundary and fault segments used by
   `load_cache()`; obtainable from the corresponding author
 
-
-## Quick test
-
-Run the synthetic smoke test from the repository root:
-
-```bash
-python examples/quick_test.py
-```
-
-On Windows PowerShell:
-
-```powershell
-python examples\quick_test.py
-```
-
-The test constructs an 80 x 80 grid, applies Gaussian smoothing, assigns 50 km analogue blocks, removes a one-cell buffer around withheld test blocks, and computes an AUC on synthetic labels. It needs no project data and should print a line beginning with `quick-test passed`. A typical result is:
-
-```text
-quick-test passed: grid=80x80, blocks=64, withheld_cells=400, training_cells=5916, synthetic_AUC=0.821
-```
-
-## Documentation
-
-- `docs/DATA_SOURCES.md`: public data sources and restricted-input policy.
-- `data/README.md`: schema of the non-redistributed raster bundle.
-- `results/`: archived aggregate outputs used in the manuscript.
-- `SHA256SUMS.txt`: checksums for released source and result files.
-
-The repository contains individual source files. It is not distributed as a zip archive.
+Scripts that call `load_cache()` (`stepG`, `stepG2`, `stepH`, `stepQ`, `stepQ4`,
+`stepQ5`, `stepQ6`, `stepR`) need `fig1_cache.pkl`; the remaining scripts run
+from `features.npz` alone.
 
 ## Scripts and reported results
 
@@ -90,7 +79,7 @@ The repository contains individual source files. It is not distributed as a zip 
 | `stepF3_stress_ablation.py` | `stress_ablation.json` | Table 3, without stress family |
 | `stepG_hf_well_colocation.py` | `hf_well_colocation.json` | Sec. 4.2, heat-flow/well co-location |
 | `stepG2_hf_well_exclusion.py` | `hf_well_exclusion.json` | Sec. 4.2, 10 km well exclusion |
-| `stepH_hf_analogue.py` | `hf_analogue.json` | Sec. 4.4, Table S1, Fig. S1 |
+| `stepH_hf_analogue.py` | `hf_analogue.json` | Sec. 4.4, Table S6, Fig. S2 |
 | `stepP_perm_metric.py` | `perm_metric_check.json` | Sec. 3.2, permutation-metric check |
 | `stepQ_p2_diagnostics.py` | `p2_diagnostics.json` | Sec. 2.2, 2.4, 3.2, 3.3 |
 | `stepQ2_fields.py` | merges into `p2_diagnostics.json` | Sec. 2.2, derived-field correlations |
@@ -101,18 +90,24 @@ The repository contains individual source files. It is not distributed as a zip 
 | `stepR_region.py` | `region_sea.json` | Sec. 3.3, Fig. 5, South China replication |
 | `stepS_sigma_sweep.py` | `sigma_sweep.json` | Sec. 3.3, Fig. 4, smoothing-scale sweep |
 | `stepT_group_transfer.py` | `group_transfer.json` | Table 1, Sec. 3.1, play-type transfer |
-| `stepU_well_surface_targets.py` | `targets_well_geo.csv`, `well_surface_summary.json` | Fig. 6, Table S2, Sec. 3.4 |
+| `stepT2_split_sensitivity.py` | `split_sensitivity.json` | Sec. 3.1, 38 and 75 km split sensitivity |
+| `stepU_well_surface_targets.py` | `targets_well_geo.csv`, `well_surface_summary.json` | Fig. 6, Table S5, Sec. 3.4 |
+| `stepV_robustness.py` | `robustness.json` | Tables S3 and S4, pseudo-negative resampling, algorithm and leaf-capacity checks |
+| `stepW_hf_coverage.py` (archived) | `stepW_hf_coverage.json` | Table 3, heat-flow support flag and distance to the nearest site; requires the heat-flow site coordinates |
 
 `results/targets_well_geo.csv` summarises the candidate areas of Sec. 3.4 and Fig. 6
 by rank, tier, area and favourability. `lonc` and `latc` locate the grid cell of
-maximum favourability in each component, not its centroid; Table S2 reports the
-area-weighted centroid. Polygon vertices are not included. `stepU` reproduces the 9/23/51 counts and the 40,694 km2 total of the
+maximum favourability in each component, not its centroid; Table S5 reports the
+area-weighted centroid. Polygon vertices are not included. `stepU` reproduces the 10/22/50 counts and the 40,603 km2 total of the
 99th, 98th and 95th percentiles.
 Within each percentile tier, `rank` orders components by decreasing `fav_max`.
-Table S2 lists the same nine P99 components in geographical order under its own
+Table S5 lists the same ten P99 components in geographical order under its own
 IDs, so the two are matched by area and cell count, not by rank.
 
-`stepT` implements the Table 1 design. `stepT` reports the archived reference values under `manuscript_table1` in `group_transfer.json`. When the original fold seed is unavailable, reruns reproduce within-group and pooled AUC to about 0.002 and cross-group AUC to about 0.02.
+`stepT` implements the Table 1 design. The script reports the five-fold mean, the
+sample standard deviation and the 2.5th-97.5th percentile interval of 1,000
+spatial-block bootstrap resamples; `manuscript_table1` in `group_transfer.json`
+lists the same values in the row order of Table 1.
 
 ## Reproducibility notes
 
