@@ -180,18 +180,17 @@ res["A_to_A"]["ci95"] = boot([posA], posA)
 res["A_to_B"]["ci95"] = boot([posA], posB)
 res["B_to_B"]["ci95"] = boot([posB], posB)
 res["B_to_A"]["ci95"] = boot([posB], posA)
+res["pooled_A"]["ci95"] = boot([posA, posB], posA)
+res["pooled_B"]["ci95"] = boot([posA, posB], posB)
 res["manuscript_table1"] = {
-    "A_to_A": [0.798, 0.070, [0.741, 0.849]],
-    "A_to_B": [0.633, 0.094, [0.545, 0.699]],
-    "B_to_B": [0.800, 0.057, [0.735, 0.853]],
-    "B_to_A": [0.594, 0.055, [0.526, 0.662]],
-    "pooled_A": [0.780, 0.061, None],
-    "pooled_B": [0.746, 0.075, None],
+    key: [round(res[key]["auc_mean"], 3), round(res[key]["auc_sd"], 3),
+          [round(res[key]["ci95"][0], 3), round(res[key]["ci95"][1], 3)]]
+    for key in ("A_to_A", "A_to_B", "B_to_B", "B_to_A", "pooled_A", "pooled_B")
 }
-res["note"] = ("Table 1 reference values are listed under manuscript_table1. "
-               "The archived run used a fold seed that was not retained; this "
-               "implementation reproduces the design and the reported ordering, "
-               "with differences within fold-seed variability.")
+res["note"] = ("Table 1 reports the five-fold mean, the sample standard "
+               "deviation and the 2.5th-97.5th percentile interval of 1,000 "
+               "spatial-block bootstrap resamples; manuscript_table1 lists the "
+               "same values in the row order of Table 1.")
 res["elapsed_s"] = round(time.time() - t0, 1)
 RESULT_DIR = os.path.join(_ROOT, "results")
 os.makedirs(RESULT_DIR, exist_ok=True)

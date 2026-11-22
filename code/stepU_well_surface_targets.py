@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Step U  Well-type screening surface and the nine 99th-percentile areas (Fig. 6, Table S2).
+"""Step U  Well-type screening surface and the ten 99th-percentile areas (Fig. 6, Table S5).
 
 The surface is built from the ten geological and geophysical predictors with the
 four spring-derived fields excluded. Cells within 10 km of a spring and 5 km of
