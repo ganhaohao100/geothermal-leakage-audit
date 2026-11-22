@@ -10,7 +10,7 @@ that a reader holding equivalent label data can rebuild it.
 |---|---|---|
 | `lon_c` | (1260,) | cell-centre longitudes, 73.0-136.0 E at 0.05 deg |
 | `lat_c` | (750,) | cell-centre latitudes, 17.0-54.5 N at 0.05 deg |
-| `mask` | (750, 1260) | boolean land mask inside the national boundary |
+| `mask` | (750, 1260) | boolean land mask inside the land mask of mainland China |
 | `cell_km2` | (750, 1260) | cell area, km2 |
 
 ## Static predictors (not derived from the target)
@@ -28,7 +28,11 @@ that a reader holding equivalent label data can rebuild it.
 | `Td_mean`, `Td_max` | dilation-tendency mean and maximum |
 
 `Ts` and `Td` are evaluated with the nine-region index in `nine_region.py`,
-a reference depth of 3 km and a fixed 70 deg dip.
+a reference depth of 3 km and a fixed 70 deg dip. `Ts` is the ratio of shear
+traction to effective normal traction on the plane, `Ts = tau / sigma_n'`, with
+`sigma_n' = sigma_n - P`; `Td` is the classic dilation tendency,
+`Td = (sigma_1 - sigma_n') / (sigma_1 - sigma_3)`, where `sigma_1` and `sigma_3`
+are the maximum and minimum effective principal stresses.
 
 ## Target-derived fields
 
